@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   version: 1.0.1
   title: CloudServicesAPI
-  description: API for LargeDevProject, pus
+  description: API for LargeDevProject, pushing to git
 basePath: /api
 schemes:
   - http
