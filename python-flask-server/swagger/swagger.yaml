@@ -1,559 +1,654 @@
-swagger: '2.0'
+---
+swagger: "2.0"
 info:
-  version: 1.0.1
-  title: CloudServicesAPI
-  description: API for LargeDevProject, pushing to git, file in correct location
-basePath: /api
+  description: "API for LargeDevProject, pushing to git"
+  version: "1.0.1"
+  title: "CloudServicesAPI"
+basePath: "/api"
 schemes:
-  - http
+- "http"
 consumes:
-  - application/json
+- "application/json"
 produces:
-  - application/json
+- "application/json"
 paths:
-  /users/:
+  /buidlings/{building_id}/robots/:
     get:
-      description: get a list of users
+      tags:
+      - "default_controller"
+      description: "get all robots in a specified building"
+      operationId: "controllers.default_controller.buidlings_building_id_robots_get"
+      parameters:
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: array of users in the database
+        200:
+          description: "robots in the building"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/user'
+              $ref: "#/definitions/robot"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     post:
-      description: create a new user
+      tags:
+      - "default_controller"
+      description: "add a robot to the specified building"
+      operationId: "controllers.default_controller.buidlings_building_id_robots_post"
+      parameters:
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     delete:
-      description: delete all users
+      tags:
+      - "default_controller"
+      description: "delete all robots from building"
+      operationId: "controllers.default_controller.buidlings_building_id_robots_delete"
+      parameters:
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
-  '/users/{user_id}':
+            $ref: "#/definitions/errorModel"
+  /buidlings/{building_id}/sensors/:
     get:
-      description: get a specific user
+      tags:
+      - "default_controller"
+      description: "get all sensors in a specific building"
+      operationId: "controllers.default_controller.buidlings_building_id_sensors_get"
       parameters:
-        - name: user_id
-          in: path
-          description: id for specific user
-          required: true
-          type: string
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: user in the database
+        200:
+          description: "sensors in the building"
           schema:
-            $ref: '#/definitions/user'
+            type: "array"
+            items:
+              $ref: "#/definitions/sensor"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
-    put:
-      description: update a specific user
+            $ref: "#/definitions/errorModel"
+    post:
+      tags:
+      - "default_controller"
+      description: "add a sensor to the specific building"
+      operationId: "controllers.default_controller.buidlings_building_id_sensors_post"
       parameters:
-        - name: user_id
-          in: path
-          description: id for specific user
-          required: true
-          type: string
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     delete:
-      description: delete a specific user
+      tags:
+      - "default_controller"
+      description: "delete a specific user"
+      operationId: "controllers.default_controller.buidlings_building_id_sensors_delete"
       parameters:
-        - name: user_id
-          in: path
-          description: id for specific user
-          required: true
-          type: string
+      - name: "building_id"
+        in: "path"
+        description: "id for specific user"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
   /buildings/:
     post:
-      description: create a new building
+      tags:
+      - "default_controller"
+      description: "create a new building"
+      operationId: "controllers.default_controller.buildings_post"
+      parameters: []
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     delete:
-      description: delete all buildings
+      tags:
+      - "default_controller"
+      description: "delete all buildings"
+      operationId: "controllers.default_controller.buildings_delete"
+      parameters: []
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
-  '/buildings/{building_id}':
+            $ref: "#/definitions/errorModel"
+  /buildings/{building_id}:
     get:
-      description: get info on a specific building
+      tags:
+      - "default_controller"
+      description: "get info on a specific building"
+      operationId: "controllers.default_controller.buildings_building_id_get"
       parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: building in the database
+        200:
+          description: "building in the database"
           schema:
-            $ref: '#/definitions/buildingObject'
+            $ref: "#/definitions/buildingObject"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     put:
-      description: update a specific building
+      tags:
+      - "default_controller"
+      description: "update a specific building"
+      operationId: "controllers.default_controller.buildings_building_id_put"
       parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
+      - name: "building_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     delete:
-      description: delete a specific building
+      tags:
+      - "default_controller"
+      description: "delete a specific building"
+      operationId: "controllers.default_controller.buildings_building_id_delete"
       parameters:
-        - name: building_id
-          in: path
-          description: id for specific user
-          required: true
-          type: string
+      - name: "building_id"
+        in: "path"
+        description: "id for specific user"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
-  '/buidlings/{building_id}/sensors/':
-    get:
-      description: get all sensors in a specific building
-      parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
-      responses:
-        '200':
-          description: sensors in the building
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/sensor'
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    post:
-      description: add a sensor to the specific building
-      parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    delete:
-      description: delete a specific user
-      parameters:
-        - name: building_id
-          in: path
-          description: id for specific user
-          required: true
-          type: string
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-  '/buidlings/{building_id}/robots/':
-    get:
-      description: get all robots in a specified building
-      parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
-      responses:
-        '200':
-          description: robots in the building
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/robot'
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    post:
-      description: add a robot to the specified building
-      parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    delete:
-      description: delete all robots from building
-      parameters:
-        - name: building_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-  /sensors/:
-    get:
-      description: get a list of all sensors
-      responses:
-        '200':
-          description: array of users in the database
-          schema:
-            type: array
-            items:
-              $ref: '#/definitions/sensor'
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    post:
-      description: create a new sensor without an associated building
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    delete:
-      description: delete all users regardless of their building
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-  '/sensors/{sensor_id}':
-    get:
-      description: get a specific sensor
-      parameters:
-        - name: sensor_id
-          in: path
-          description: id for specific sensor
-          required: true
-          type: string
-      responses:
-        '200':
-          description: sensors in the building
-          schema:
-            $ref: '#/definitions/sensor'
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    put:
-      description: update a specific sensor
-      parameters:
-        - name: sensor_id
-          in: path
-          description: id for specific sensor
-          required: true
-          type: string
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
-    delete:
-      description: delete a specific sensor
-      parameters:
-        - name: sensor_id
-          in: path
-          description: id for specific user
-          required: true
-          type: string
-      responses:
-        '200':
-          description: success message
-          schema:
-            type: string
-        default:
-          description: not found
-          schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
   /robots/:
     get:
-      description: Get a list of all robots
+      tags:
+      - "default_controller"
+      description: "Get a list of all robots"
+      operationId: "controllers.default_controller.robots_get"
+      parameters: []
       responses:
-        '200':
-          description: array of robots in the database
+        200:
+          description: "array of robots in the database"
           schema:
-            type: array
+            type: "array"
             items:
-              $ref: '#/definitions/robot'
+              $ref: "#/definitions/robot"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     delete:
-      description: delete all robots
+      tags:
+      - "default_controller"
+      description: "delete all robots"
+      operationId: "controllers.default_controller.robots_delete"
+      parameters: []
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
-  '/robots/{robot_id}':
+            $ref: "#/definitions/errorModel"
+  /robots/{robot_id}:
     get:
-      description: return a specefic robot
+      tags:
+      - "default_controller"
+      description: "return a specefic robot"
+      operationId: "controllers.default_controller.robots_robot_id_get"
       parameters:
-        - name: robot_id
-          in: path
-          description: id for specefic robot
-          required: true
-          type: string
+      - name: "robot_id"
+        in: "path"
+        description: "id for specefic robot"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: robot in the database
+        200:
+          description: "robot in the database"
           schema:
-            $ref: '#/definitions/robot'
+            $ref: "#/definitions/robot"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     put:
-      description: update a specific robot
+      tags:
+      - "default_controller"
+      description: "update a specific robot"
+      operationId: "controllers.default_controller.robots_robot_id_put"
       parameters:
-        - name: robot_id
-          in: path
-          description: id for specific building
-          required: true
-          type: string
+      - name: "robot_id"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
     delete:
-      description: delete specefic robot
+      tags:
+      - "default_controller"
+      description: "delete specefic robot"
+      operationId: "controllers.default_controller.robots_robot_id_delete"
       parameters:
-        - name: robot_id
-          in: path
-          description: id for specefic robot
-          required: true
-          type: string
+      - name: "robot_id"
+        in: "path"
+        description: "id for specefic robot"
+        required: true
+        type: "string"
       responses:
-        '200':
-          description: success message
+        200:
+          description: "success message"
           schema:
-            type: string
+            type: "string"
         default:
-          description: not found
+          description: "not found"
           schema:
-            $ref: '#/definitions/errorModel'
+            $ref: "#/definitions/errorModel"
+  /sensors/:
+    get:
+      tags:
+      - "default_controller"
+      description: "get a list of all sensors"
+      operationId: "controllers.default_controller.sensors_get"
+      parameters: []
+      responses:
+        200:
+          description: "array of users in the database"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/sensor"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    post:
+      tags:
+      - "default_controller"
+      description: "create a new sensor without an associated building"
+      operationId: "controllers.default_controller.sensors_post"
+      parameters: []
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    delete:
+      tags:
+      - "default_controller"
+      description: "delete all users regardless of their building"
+      operationId: "controllers.default_controller.sensors_delete"
+      parameters: []
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+  /sensors/{sensor_id}:
+    get:
+      tags:
+      - "default_controller"
+      description: "get a specific sensor"
+      operationId: "controllers.default_controller.sensors_sensor_id_get"
+      parameters:
+      - name: "sensor_id"
+        in: "path"
+        description: "id for specific sensor"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "sensors in the building"
+          schema:
+            $ref: "#/definitions/sensor"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    put:
+      tags:
+      - "default_controller"
+      description: "update a specific sensor"
+      operationId: "controllers.default_controller.sensors_sensor_id_put"
+      parameters:
+      - name: "sensor_id"
+        in: "path"
+        description: "id for specific sensor"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    delete:
+      tags:
+      - "default_controller"
+      description: "delete a specific sensor"
+      operationId: "controllers.default_controller.sensors_sensor_id_delete"
+      parameters:
+      - name: "sensor_id"
+        in: "path"
+        description: "id for specific user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+  /users/:
+    get:
+      tags:
+      - "default_controller"
+      description: "get a list of users"
+      operationId: "controllers.default_controller.users_get"
+      parameters: []
+      responses:
+        200:
+          description: "array of users in the database"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/user"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    post:
+      tags:
+      - "default_controller"
+      description: "create a new user"
+      operationId: "controllers.default_controller.users_post"
+      parameters: []
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    delete:
+      tags:
+      - "default_controller"
+      description: "delete all users"
+      operationId: "controllers.default_controller.users_delete"
+      parameters: []
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+  /users/{user_id}:
+    get:
+      tags:
+      - "default_controller"
+      description: "get a specific user"
+      operationId: "controllers.default_controller.users_user_id_get"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "id for specific user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "user in the database"
+          schema:
+            $ref: "#/definitions/user"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    put:
+      tags:
+      - "default_controller"
+      description: "update a specific user"
+      operationId: "controllers.default_controller.users_user_id_put"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "id for specific user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+    delete:
+      tags:
+      - "default_controller"
+      description: "delete a specific user"
+      operationId: "controllers.default_controller.users_user_id_delete"
+      parameters:
+      - name: "user_id"
+        in: "path"
+        description: "id for specific user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
 definitions:
   sensor:
-    type: object
+    type: "object"
     properties:
       iD:
-        type: string
+        type: "string"
       Type:
-        type: string
+        type: "string"
       location:
-        type: string
+        type: "string"
       Buildingid:
-        type: string
+        type: "string"
       room:
-        type: string
+        type: "string"
       data:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/sensorData'
+          $ref: "#/definitions/sensorData"
   sensorData:
-    type: object
+    type: "object"
     properties:
       sensorModel:
-        type: string
+        type: "string"
       data:
-        type: array
+        type: "array"
         items:
-          type: string
+          type: "string"
   buildingObject:
-    type: object
+    type: "object"
     properties:
       Building:
-        type: string
+        type: "string"
       buildingID:
-        type: string
+        type: "string"
       owner:
-        type: string
+        type: "string"
       rooms:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/room'
+          $ref: "#/definitions/room"
       users:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/user'
+          $ref: "#/definitions/user"
       sensors:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/sensor'
+          $ref: "#/definitions/sensor"
       robots:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/robot'
+          $ref: "#/definitions/robot"
   user:
-    type: object
+    type: "object"
     properties:
       username:
-        type: string
+        type: "string"
       location:
-        type: string
+        type: "string"
   errorModel:
-    type: object
+    type: "object"
     required:
-      - message
+    - "message"
     properties:
       message:
-        type: string
+        type: "string"
   robot:
-    type: object
+    type: "object"
     properties:
       id:
-        type: integer
+        type: "integer"
       emergency:
-        type: boolean
+        type: "boolean"
       offensive:
-        type: boolean
+        type: "boolean"
       sensors:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/sensor'
+          $ref: "#/definitions/sensor"
       buildingID:
-        type: integer
+        type: "integer"
       name:
-        type: string
+        type: "string"
       Movement:
-        type: string
+        type: "string"
       Update:
-        type: integer
+        type: "integer"
       floor:
-        type: integer
+        type: "integer"
   room:
-    type: object
+    type: "object"
     properties:
       roomName:
-        type: string
+        type: "string"
       statuses:
-        type: array
+        type: "array"
         items:
-          type: string
+          type: "string"
       width:
-        type: string
+        type: "string"
       length:
-        type: string
+        type: "string"
       robots:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/sensor'
+          $ref: "#/definitions/sensor"
       sensors:
-        type: array
+        type: "array"
         items:
-          $ref: '#/definitions/sensor'
+          $ref: "#/definitions/sensor"
