@@ -1,3 +1,8 @@
+
+import json
+from flask import request, jsonify
+from models import Building, Sensor
+
 #delete all robots from building
 def buidlings_building_id_robots_delete(buildingId) -> str:
     return 'do some magic!'
@@ -28,7 +33,8 @@ def buildings_building_id_delete(buildingId) -> str:
 
 #get a building
 def buildings_building_id_get(buildingId) -> str:
-    return 'do some magic!'
+    return 'wow'
+    #return jsonify(Building.get(int(buildingId)))
 
 #update a building
 def buildings_building_id_put(buildingId) -> str:
@@ -40,7 +46,18 @@ def buildings_delete() -> str:
 
 #create a new building
 def buildings_post() -> str:
-    return 'do some magic!'
+    data = request.json
+    print(data)
+    newBuilding = Building(id=data['id'],
+                           buildingId=data['buildingId'],
+                           building=data['building'],
+                           rooms=data['rooms'],
+                           owner=data['owner'],
+                           users=data['users'],
+                           sensors=data['sensors'],
+                           robots=data['robots'])
+    newBuilding.save()
+    return 'New building id=%s created successfully' % (data['id'])
 
 #delete all robots
 def robots_delete() -> str:
@@ -68,11 +85,19 @@ def sensors_delete() -> str:
 
 #get all sensors
 def sensors_get() -> str:
-    return 'do some magic!'
+    return 'get all sensors!'
 
 #create a new sensor
 def sensors_post() -> str:
-    return 'do some magic!'
+    data = request.json
+    print(data)
+    newSens = Sensor(sensorId=data['sensorId'],
+                     sensorType=data['sensorType'],
+                     buildingId=data['buildingId'],
+                     roomId=data['roomId'],
+                     data=data['data'])
+    newSens.save()
+    return 'New sensor id=%s created successfully' % (data['sensorId'])
 
 #delete a single sensor
 def sensors_sensor_id_delete(sensorId) -> str:
@@ -80,7 +105,8 @@ def sensors_sensor_id_delete(sensorId) -> str:
 
 #get a single sensor
 def sensors_sensor_id_get(sensorId) -> str:
-    return 'do some magic!'
+    #return jsonify(Sensor.get(sensorId))
+    return 'get one sensor!'
 
 #update a single sensor
 def sensors_sensor_id_put(sensorId) -> str:
@@ -96,7 +122,7 @@ def users_get() -> str:
 
 #create a new user
 def users_post() -> str:
-    return 'do some magic!'
+    return 'post user!'
 
 #delete a single user
 def users_user_id_delete(userId) -> str:
@@ -104,7 +130,8 @@ def users_user_id_delete(userId) -> str:
 
 #get a single user
 def users_user_id_get(userId) -> str:
-    return 'do some magic!'
+    return 'get one user!'
+
  #update a single user
 def users_user_id_put(userId) -> str:
     return 'do some magic!'
