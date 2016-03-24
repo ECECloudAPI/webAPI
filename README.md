@@ -7,5 +7,5 @@ webAPI/python-flask-server/README.md
 
 Swagger yaml code is stored in the swaggerhub project at:
 https://swaggerhub.com/api/skralick/CloudServicesAPI/1.0.1
-and when contributors save it is pushed to the path: 
-webAPI/python-flask-server/swagger/swagger.yaml 
+
+automatic pushing to git has been disabled 
