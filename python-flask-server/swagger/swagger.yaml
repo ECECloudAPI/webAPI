@@ -1,8 +1,8 @@
 ---
 swagger: "2.0"
 info:
-  description: "API for LargeDevProject, pushing to git"
-  version: "1.0.1"
+  description: "API for LargeDevProject, pushing to git, file in correct location"
+  version: "1.0.2"
   title: "CloudServicesAPI"
 basePath: "/api"
 schemes:
@@ -485,6 +485,7 @@ paths:
     get:
       tags:
       - "default_controller"
+      summary: "this allows api clients to get information on a specific user"
       description: "get a specific user"
       operationId: "controllers.default_controller.users_user_id_get"
       parameters:
