@@ -1,29 +1,56 @@
 
-def buidlings_building_id_robots_delete(buildingId) -> str:
+def buidlings_building_id_robots_delete(buildingID) -> str:
     return 'do some magic!'
 
-def buidlings_building_id_robots_get(buildingId) -> str:
+def buidlings_building_id_robots_get(buildingID) -> str:
     return 'do some magic!'
 
-def buidlings_building_id_robots_post(buildingId) -> str:
+def buidlings_building_id_robots_post(buildingID) -> str:
     return 'do some magic!'
 
-def buidlings_building_id_sensors_delete(buildingId) -> str:
+def buidlings_building_id_sensors_delete(buildingID) -> str:
     return 'do some magic!'
 
-def buidlings_building_id_sensors_get(buildingId) -> str:
+def buidlings_building_id_sensors_get(buildingID) -> str:
     return 'do some magic!'
 
-def buidlings_building_id_sensors_post(buildingId) -> str:
+def buidlings_building_id_sensors_post(buildingID) -> str:
     return 'do some magic!'
 
-def buildings_building_id_delete(buildingId) -> str:
+def buildings_building_id_delete(buildingID) -> str:
     return 'do some magic!'
 
-def buildings_building_id_get(buildingId) -> str:
+def buildings_building_id_get(buildingID) -> str:
     return 'do some magic!'
 
-def buildings_building_id_put(buildingId) -> str:
+def buildings_building_id_put(buildingID) -> str:
+    return 'do some magic!'
+
+def robots_robot_id_delete(robotID) -> str:
+    return 'do some magic!'
+
+def robots_robot_id_get(robotID) -> str:
+    return 'do some magic!'
+
+def robots_robot_id_put(robotID) -> str:
+    return 'do some magic!'
+
+def sensors_sensor_id_delete(sensorID) -> str:
+    return 'do some magic!'
+
+def sensors_sensor_id_get(sensorID) -> str:
+    return 'do some magic!'
+
+def sensors_sensor_id_put(sensorID) -> str:
+    return 'do some magic!'
+
+def users_user_id_delete(userID) -> str:
+    return 'do some magic!'
+
+def users_user_id_get(userID) -> str:
+    return 'do some magic!'
+
+def users_user_id_put(userID) -> str:
     return 'do some magic!'
 
 def buildings_delete() -> str:
@@ -38,15 +65,6 @@ def robots_delete() -> str:
 def robots_get() -> str:
     return 'do some magic!'
 
-def robots_robot_id_delete(robotId) -> str:
-    return 'do some magic!'
-
-def robots_robot_id_get(robotId) -> str:
-    return 'do some magic!'
-
-def robots_robot_id_put(robotId) -> str:
-    return 'do some magic!'
-
 def sensors_delete() -> str:
     return 'do some magic!'
 
@@ -56,15 +74,6 @@ def sensors_get() -> str:
 def sensors_post() -> str:
     return 'do some magic!'
 
-def sensors_sensor_id_delete(sensorId) -> str:
-    return 'do some magic!'
-
-def sensors_sensor_id_get(sensorId) -> str:
-    return 'do some magic!'
-
-def sensors_sensor_id_put(sensorId) -> str:
-    return 'do some magic!'
-
 def users_delete() -> str:
     return 'do some magic!'
 
@@ -72,13 +81,4 @@ def users_get() -> str:
     return 'do some magic!'
 
 def users_post() -> str:
-    return 'do some magic!'
-
-def users_user_id_delete(userId) -> str:
-    return 'do some magic!'
-
-def users_user_id_get(userId) -> str:
-    return 'do some magic!'
-
-def users_user_id_put(userId) -> str:
     return 'do some magic!'
