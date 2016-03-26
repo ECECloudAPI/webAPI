@@ -50,9 +50,9 @@ paths:
         type: "string"
       responses:
         200:
-          description: "success message"
+          description: "the newly created robot"
           schema:
-            type: "string"
+            $ref: "#/definitions/robot"
         default:
           description: "not found"
           schema:
@@ -119,9 +119,9 @@ paths:
         type: "string"
       responses:
         200:
-          description: "success message"
+          description: "newly created sensor"
           schema:
-            type: "string"
+            $ref: "#/definitions/sensor"
         default:
           description: "not found"
           schema:
@@ -133,108 +133,6 @@ paths:
       - "byBuilding"
       description: "delete a specific user"
       operationId: "controllers.default_controller.buidlings_building_id_sensors_delete"
-      parameters:
-      - name: "buildingID"
-        in: "path"
-        description: "id for specific user"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "success message"
-          schema:
-            type: "string"
-        default:
-          description: "not found"
-          schema:
-            $ref: "#/definitions/errorModel"
-      x-tags:
-      - tag: "byBuilding"
-  /buildings/:
-    post:
-      tags:
-      - "byType"
-      description: "create a new building"
-      operationId: "controllers.default_controller.buildings_post"
-      parameters: []
-      responses:
-        200:
-          description: "success message"
-          schema:
-            type: "string"
-        default:
-          description: "not found"
-          schema:
-            $ref: "#/definitions/errorModel"
-      x-tags:
-      - tag: "byType"
-    delete:
-      tags:
-      - "byType"
-      description: "delete all buildings"
-      operationId: "controllers.default_controller.buildings_delete"
-      parameters: []
-      responses:
-        200:
-          description: "success message"
-          schema:
-            type: "string"
-        default:
-          description: "not found"
-          schema:
-            $ref: "#/definitions/errorModel"
-      x-tags:
-      - tag: "byType"
-  /buildings/{buildingID}:
-    get:
-      tags:
-      - "byBuilding"
-      description: "get info on a specific building"
-      operationId: "controllers.default_controller.buildings_building_id_get"
-      parameters:
-      - name: "buildingID"
-        in: "path"
-        description: "id for specific building"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "building in the database"
-          schema:
-            $ref: "#/definitions/buildingObject"
-        default:
-          description: "not found"
-          schema:
-            $ref: "#/definitions/errorModel"
-      x-tags:
-      - tag: "byBuilding"
-    put:
-      tags:
-      - "byBuilding"
-      description: "update a specific building"
-      operationId: "controllers.default_controller.buildings_building_id_put"
-      parameters:
-      - name: "buildingID"
-        in: "path"
-        description: "id for specific building"
-        required: true
-        type: "string"
-      responses:
-        200:
-          description: "success message"
-          schema:
-            type: "string"
-        default:
-          description: "not found"
-          schema:
-            $ref: "#/definitions/errorModel"
-      x-tags:
-      - tag: "byBuilding"
-    delete:
-      tags:
-      - "byBuilding"
-      description: "delete a specific building"
-      operationId: "controllers.default_controller.buildings_building_id_delete"
       parameters:
       - name: "buildingID"
         in: "path"
@@ -323,6 +221,12 @@ paths:
         description: "id for specific building"
         required: true
         type: "string"
+      - in: "body"
+        name: "newRobot"
+        description: "the new data for the robot"
+        required: true
+        schema:
+          $ref: "#/definitions/robot"
       responses:
         200:
           description: "success message"
@@ -365,7 +269,7 @@ paths:
       parameters: []
       responses:
         200:
-          description: "array of users in the database"
+          description: "array of sensors in the database"
           schema:
             type: "array"
             items:
@@ -384,9 +288,9 @@ paths:
       parameters: []
       responses:
         200:
-          description: "success message"
+          description: "newly created sensor"
           schema:
-            type: "string"
+            $ref: "#/definitions/sensor"
         default:
           description: "not found"
           schema:
@@ -424,7 +328,7 @@ paths:
         type: "string"
       responses:
         200:
-          description: "sensors in the building"
+          description: "the specific sensor"
           schema:
             $ref: "#/definitions/sensor"
         default:
@@ -444,6 +348,12 @@ paths:
         description: "id for specific sensor"
         required: true
         type: "string"
+      - in: "body"
+        name: "newSensor"
+        description: "the new data for the sensor"
+        required: true
+        schema:
+          $ref: "#/definitions/sensor"
       responses:
         200:
           description: "success message"
@@ -500,14 +410,14 @@ paths:
     post:
       tags:
       - "byType"
-      description: "create a new user"
+      description: "create a new user and returns it"
       operationId: "controllers.default_controller.users_post"
       parameters: []
       responses:
         200:
-          description: "success message"
+          description: "the created user"
           schema:
-            type: "string"
+            $ref: "#/definitions/user"
         default:
           description: "not found"
           schema:
@@ -566,6 +476,12 @@ paths:
         description: "id for specific user"
         required: true
         type: "string"
+      - in: "body"
+        name: "newUser"
+        description: "the new data for the user"
+        required: true
+        schema:
+          $ref: "#/definitions/user"
       responses:
         200:
           description: "success message"
@@ -603,61 +519,51 @@ definitions:
   sensor:
     type: "object"
     properties:
-      iD:
-        type: "string"
-      Type:
-        type: "string"
-      location:
-        type: "string"
-      Buildingid:
-        type: "string"
-      room:
-        type: "string"
-      data:
-        type: "array"
-        items:
-          $ref: "#/definitions/sensorData"
-  sensorData:
-    type: "object"
-    properties:
-      sensorModel:
-        type: "string"
-      data:
-        type: "array"
-        items:
-          type: "string"
-  buildingObject:
-    type: "object"
-    properties:
-      Building:
+      id:
         type: "string"
       buildingID:
         type: "string"
-      owner:
+      floor:
+        type: "number"
+        format: "int"
+      room:
+        type: "number"
+        format: "int"
+      xpos:
+        type: "number"
+        format: "int"
+      ypos:
+        type: "number"
+        format: "int"
+      robot:
         type: "string"
-      rooms:
-        type: "array"
-        items:
-          $ref: "#/definitions/room"
-      users:
-        type: "array"
-        items:
-          $ref: "#/definitions/user"
-      sensors:
-        type: "array"
-        items:
-          $ref: "#/definitions/sensor"
-      robots:
-        type: "array"
-        items:
-          $ref: "#/definitions/robot"
+      from:
+        type: "string"
+      type:
+        type: "string"
   user:
     type: "object"
     properties:
-      username:
+      id:
         type: "string"
-      location:
+      buildingID:
         type: "string"
+      floor:
+        type: "number"
+        format: "int"
+      room:
+        type: "number"
+        format: "int"
+      xpos:
+        type: "number"
+        format: "int"
+      ypos:
+        type: "number"
+        format: "int"
+      message:
+        type: "string"
+      owner:
+        type: "boolean"
   errorModel:
     type: "object"
     required:
@@ -669,43 +575,30 @@ definitions:
     type: "object"
     properties:
       id:
-        type: "integer"
-      emergency:
-        type: "boolean"
-      offensive:
-        type: "boolean"
-      sensors:
-        type: "array"
-        items:
-          $ref: "#/definitions/sensor"
+        type: "string"
       buildingID:
-        type: "integer"
-      name:
         type: "string"
-      Movement:
-        type: "string"
-      Update:
-        type: "integer"
-      floor:
-        type: "integer"
-  room:
-    type: "object"
-    properties:
-      roomName:
-        type: "string"
-      statuses:
+      sensorID:
         type: "array"
         items:
           type: "string"
-      width:
-        type: "string"
-      length:
-        type: "string"
-      robots:
+      capabilities:
         type: "array"
         items:
-          $ref: "#/definitions/sensor"
-      sensors:
-        type: "array"
-        items:
-          $ref: "#/definitions/sensor"
+          type: "string"
+      movement:
+        type: "string"
+      floor:
+        type: "number"
+        format: "int"
+      room:
+        type: "number"
+        format: "int"
+      xpos:
+        type: "number"
+        format: "int"
+      ypos:
+        type: "number"
+        format: "int"
+      from:
+        type: "string"
