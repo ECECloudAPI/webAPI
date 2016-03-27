@@ -1,7 +1,7 @@
 ---
 swagger: "2.0"
 info:
-  description: "API for LargeDevProject, pushing to git, file in correct location"
+  description: "API for LargeDevProject Cloud Services Group"
   version: "1.0.2"
   title: "CloudServicesAPI"
 basePath: "/api"
@@ -150,6 +150,133 @@ paths:
             $ref: "#/definitions/errorModel"
       x-tags:
       - tag: "byBuilding"
+  /buildings/:
+    get:
+      tags:
+      - "byType"
+      description: "get a list of all buildings"
+      operationId: "controllers.default_controller.buildings_get"
+      parameters: []
+      responses:
+        200:
+          description: "array of buildings in the database"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/building"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+      x-tags:
+      - tag: "byType"
+    post:
+      tags:
+      - "byType"
+      description: "create a new building"
+      operationId: "controllers.default_controller.buildings_post"
+      parameters: []
+      responses:
+        200:
+          description: "newly created building"
+          schema:
+            $ref: "#/definitions/building"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+      x-tags:
+      - tag: "byType"
+    delete:
+      tags:
+      - "byType"
+      description: "delete all buildings"
+      operationId: "controllers.default_controller.buildings_delete"
+      parameters: []
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+      x-tags:
+      - tag: "byType"
+  /buildings/{buildingID}:
+    get:
+      tags:
+      - "byID"
+      description: "return a specefic building"
+      operationId: "controllers.default_controller.buildings_building_id_get"
+      parameters:
+      - name: "buildingID"
+        in: "path"
+        description: "id for specefic building"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "building in the database"
+          schema:
+            $ref: "#/definitions/building"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+      x-tags:
+      - tag: "byID"
+    put:
+      tags:
+      - "byID"
+      description: "update a specific building"
+      operationId: "controllers.default_controller.buildings_building_id_put"
+      parameters:
+      - name: "buildingID"
+        in: "path"
+        description: "id for specific building"
+        required: true
+        type: "string"
+      - in: "body"
+        name: "newBuilding"
+        description: "the new data for the building"
+        required: true
+        schema:
+          $ref: "#/definitions/building"
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+      x-tags:
+      - tag: "byID"
+    delete:
+      tags:
+      - "byID"
+      description: "delete specific building"
+      operationId: "controllers.default_controller.buildings_building_id_delete"
+      parameters:
+      - name: "buildingID"
+        in: "path"
+        description: "id for specefic buidling"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "success message"
+          schema:
+            type: "string"
+        default:
+          description: "not found"
+          schema:
+            $ref: "#/definitions/errorModel"
+      x-tags:
+      - tag: "byID"
   /robots/:
     get:
       tags:
@@ -516,6 +643,13 @@ paths:
       x-tags:
       - tag: "byID"
 definitions:
+  building:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      status:
+        type: "string"
   sensor:
     type: "object"
     properties:
