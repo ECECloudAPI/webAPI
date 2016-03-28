@@ -8,7 +8,10 @@ def buidlings_building_id_robots_delete(buildingID) -> str:
     return 'do some magic!'
 
 def buidlings_building_id_robots_get(buildingID) -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Robot.scan(buildingID__eq=buildingID):
+        resultList.append(item.attribute_values)
+    return ( resultList )
 
 def buidlings_building_id_robots_post(buildingID) -> str:
     try:
@@ -25,7 +28,10 @@ def buidlings_building_id_sensors_delete(buildingID) -> str:
     return 'do some magic!'
 
 def buidlings_building_id_sensors_get(buildingID) -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Sensor.scan(buildingID__eq=buildingID):
+        resultList.append(item.attribute_values)
+    return ( resultList )
 
 def buidlings_building_id_sensors_post(buildingID) -> str:
     try:
