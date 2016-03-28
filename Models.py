@@ -3,7 +3,7 @@
 #from flywheel import STRING, STRING_SET, BINARY, NUMBER
 # Set up our data model
 
-from pynamodb.models import model
+from pynamodb.models import Model
 from pynamodb.attributes import (
     UnicodeAttribute, NumberAttribute, UnicodeSetAttribute, UTCDateTimeAttribute, NumberSetAttribute, BooleanAttribute, JSONAttribute, UnicodeSetAttribute, BinarySetAttribute
 )
