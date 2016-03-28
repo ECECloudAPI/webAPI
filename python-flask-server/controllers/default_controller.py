@@ -61,7 +61,15 @@ def buildings_building_id_get(buildingID) -> str:
     return building.attribute_values
 
 def buildings_building_id_put(buildingID, newBuilding) -> str:
-    return 'do some magic!'
+    try:
+        building = Building.get(buildingID)
+    except Exception as e:
+        return 'Building with id=%s does not exist.' % (buildingID)
+    attributes = building.attribute_values.keys()
+    for key in newBuilding.keys():
+        if key in attributes and key is not 'id':
+            building.update_item(key, value=newBuilding[key], action='PUT')
+    return 'New building id=%s updated successfully.' % (buildingID)
 
 def robots_robot_id_delete(robotID) -> str:
     try:
@@ -79,7 +87,15 @@ def robots_robot_id_get(robotID) -> str:
     return robot.attribute_values
 
 def robots_robot_id_put(robotID, newRobot) -> str:
-    return 'do some magic!'
+    try:
+        robot = Robot.get(robotID)
+    except Exception as e:
+        return 'Robot with id=%s does not exist.' % (robotID)
+    attributes = robot.attribute_values.keys()
+    for key in newRobot.keys():
+        if key in attributes and key is not 'id':
+            robot.update_item(key, value=newRobot[key], action='PUT')
+    return 'New robot id=%s updated successfully.' % (robotID)
 
 def sensors_sensor_id_delete(sensorID) -> str:
     try:
