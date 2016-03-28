@@ -11,7 +11,15 @@ def buidlings_building_id_robots_get(buildingID) -> str:
     return 'do some magic!'
 
 def buidlings_building_id_robots_post(buildingID) -> str:
-    return 'do some magic!'
+    try:
+        building = Building.get(buildingID)
+    except Exception as e:
+        print(e)
+        return 'Building with id %s does not exist.' % (buildingID)
+    newID = str(uuid.uuid4())
+    newObj = Robot(id=newID, buildingID=buildingID)
+    newObj.save()
+    return newObj.attribute_values
 
 def buidlings_building_id_sensors_delete(buildingID) -> str:
     return 'do some magic!'
@@ -20,7 +28,15 @@ def buidlings_building_id_sensors_get(buildingID) -> str:
     return 'do some magic!'
 
 def buidlings_building_id_sensors_post(buildingID) -> str:
-    return 'do some magic!'
+    try:
+        building = Building.get(buildingID)
+    except Exception as e:
+        print(e)
+        return 'Building with id %s does not exist.' % (buildingID)
+    newID = str(uuid.uuid4())
+    newObj = Sensor(id=newID, buildingID=buildingID)
+    newObj.save()
+    return newObj.attribute_values
 
 def buildings_building_id_delete(buildingID) -> str:
     try:
