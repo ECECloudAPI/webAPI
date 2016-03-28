@@ -23,7 +23,12 @@ def buidlings_building_id_sensors_post(buildingID) -> str:
     return 'do some magic!'
 
 def buildings_building_id_delete(buildingID) -> str:
-    return 'do some magic!'
+    try:
+		Building = Building.get(buildingID)
+		Building.delete()
+	except Exception as e:		
+		return 'Building with buildingID=%s does not exist.' % (buildingID)
+	return 'Successfully deleted buildingID=%s.' % (buildingID)
 
 def buildings_building_id_get(buildingID) -> str:
     return 'do some magic!'
@@ -99,7 +104,12 @@ def robots_get() -> str:
     return 'do some magic!'
 
 def sensors_delete() -> str:
-    return 'do some magic!'
+	try:
+		sensor = Sensor.get(sensorID)
+		sensor.delete()
+	except Exception as e:		
+		return 'Sensor with sensorId=%s does not exist.' % (sensorID)
+	return 'Successfully deleted sensorId=%s.' % (sensorID)
 
 def sensors_get() -> str:
     return 'do some magic!'
