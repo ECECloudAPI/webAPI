@@ -87,7 +87,10 @@ def buildings_get() -> str:
     return 'do some magic!'
 
 def buildings_post() -> str:
-    return 'do some magic!'
+    newID = str(uuid.uuid4())
+    newObj = Building(id=newID)
+    newObj.save()
+    return newObj.attribute_values
 
 def robots_delete() -> str:
     return 'do some magic!'
@@ -114,4 +117,7 @@ def users_get() -> str:
     return 'do some magic!'
 
 def users_post() -> str:
-    return 'do some magic!'
+    newID = str(uuid.uuid4())
+    newObj = User(id=newID)
+    newObj.save()
+    return newObj.attribute_values
