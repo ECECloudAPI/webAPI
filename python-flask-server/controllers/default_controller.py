@@ -46,7 +46,12 @@ def robots_robot_id_put(robotID, newRobot) -> str:
     return 'do some magic!'
 
 def sensors_sensor_id_delete(sensorID) -> str:
-    return 'do some magic!'
+	try:
+		sensor = Sensor.get(sensorID)
+		sensor.delete()
+	except Exception as e:		
+		return 'Sensor with sensorId=%s does not exist.' % (sensorID)
+	return 'Successfully deleted sensorId=%s.' % (sensorID)
 
 def sensors_sensor_id_get(sensorID) -> str:
     #return 'do some magic!'
@@ -104,12 +109,7 @@ def robots_get() -> str:
     return 'do some magic!'
 
 def sensors_delete() -> str:
-	try:
-		sensor = Sensor.get(sensorID)
-		sensor.delete()
-	except Exception as e:		
-		return 'Sensor with sensorId=%s does not exist.' % (sensorID)
-	return 'Successfully deleted sensorId=%s.' % (sensorID)
+    return 'do some magic!'
 
 def sensors_get() -> str:
     return 'do some magic!'
