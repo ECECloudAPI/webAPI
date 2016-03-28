@@ -2,7 +2,7 @@
 import json
 import uuid
 from flask import request, jsonify
-from storageModels import Building, Sensor
+from storageModels import Building, Sensor, User, Robot
 
 def buidlings_building_id_robots_delete(buildingID) -> str:
     return 'do some magic!'
