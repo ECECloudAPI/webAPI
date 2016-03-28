@@ -23,7 +23,7 @@ def buidlings_building_id_sensors_post(buildingID) -> str:
     return 'do some magic!'
 
 def buildings_building_id_delete(buildingID) -> str:
-    try:
+	try:
 		Building = Building.get(buildingID)
 		Building.delete()
 	except Exception as e:		
