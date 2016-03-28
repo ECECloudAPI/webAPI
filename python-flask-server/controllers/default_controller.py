@@ -123,7 +123,10 @@ def buildings_delete() -> str:
     return 'do some magic!'
 
 def buildings_get() -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Building.scan():
+        resultList.append(item.attribute_values)
+    return resultList
 
 def buildings_post() -> str:
     newID = str(uuid.uuid4())
@@ -135,13 +138,19 @@ def robots_delete() -> str:
     return 'do some magic!'
 
 def robots_get() -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Robot.scan():
+        resultList.append(item.attribute_values)
+    return resultList
 
 def sensors_delete() -> str:
     return 'do some magic!'
 
 def sensors_get() -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Sensor.scan():
+        resultList.append(item.attribute_values)
+    return resultList
 
 def sensors_post() -> str:
     newID = str(uuid.uuid4())
@@ -153,7 +162,10 @@ def users_delete() -> str:
     return 'do some magic!'
 
 def users_get() -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in User.scan():
+        resultList.append(item.attribute_values)
+    return resultList
 
 def users_post() -> str:
     newID = str(uuid.uuid4())
