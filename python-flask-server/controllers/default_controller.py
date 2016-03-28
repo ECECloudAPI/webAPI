@@ -1,7 +1,8 @@
 
 import json
+import uuid
 from flask import request, jsonify
-from Models import Building, Sensor
+from storageModels import Building, Sensor
 
 def buidlings_building_id_robots_delete(buildingID) -> str:
     return 'do some magic!'
@@ -54,7 +55,21 @@ def sensors_sensor_id_get(sensorID) -> str:
     return sensor.attribute_values
 
 def sensors_sensor_id_put(sensorID, newSensor) -> str:
-    return 'do some magic!'
+    try:
+        sensor = Sensor.get(sensorID)
+        print(sensor.attribute_values)
+    except Exception as e:
+        #print(e)
+        return 'Sensor with sensorId=%s does not exist.' % (sensorID)
+    print(newSensor)
+    data = json.loads(newSensor)
+    sensorObj = Sensor(sensorId=sensorID,
+                       sensorType=data['sensorType'],
+                       buildingId=data['buildingId'],
+                       roomId=data['roomId'],
+                       data=data['data'])
+    sensorObj.save()
+    return 'New sensor id=%s updated successfully.' % (data['sensorId'])
 
 def users_user_id_delete(userID) -> str:
     return 'do some magic!'
@@ -87,15 +102,18 @@ def sensors_get() -> str:
     return 'do some magic!'
 
 def sensors_post() -> str:
-    data = request.json
-    print(data)
-    newSens = Sensor(sensorId=data['sensorId'],
-                     sensorType=data['sensorType'],
-                     buildingId=data['buildingId'],
-                     roomId=data['roomId'],
-                     data=data['data'])
-    newSens.save()
-    return 'New sensor id=%s created successfully.' % (data['sensorId'])
+    newID = str(uuid.uuid4())
+    sensorObj = Sensor(id=newID,
+                       buildingId='default',
+                       floor=0,
+                       room=0,
+                       xpos=0,
+                       ypos=0,
+                       robot='default',
+                       fromVal='default',
+                       type='default')
+    sensorObj.save()
+    return newID
 
 def users_delete() -> str:
     return 'do some magic!'

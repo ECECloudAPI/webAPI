@@ -1,4 +1,4 @@
-from Models import Sensor, Building
+from storageModels import Sensor, Building
 
 
 mySens = Sensor(sensorId = 'yet another id',
