@@ -14,48 +14,47 @@ class Sensor(Model):
     class Meta:
         table_name = 'Sensor'
     id = UnicodeAttribute(hash_key=True)
-    buildingID = UnicodeAttribute()
-    floor = NumberAttribute()
-    room = NumberAttribute()
-    xpos = NumberAttribute()
-    ypos = NumberAttribute()
-    robot = UnicodeAttribute()
-    fromVal = UnicodeAttribute()
-    type = UnicodeAttribute()
+    buildingID = UnicodeAttribute(default='')
+    floor = NumberAttribute(default=0)
+    room = NumberAttribute(default=0)
+    xpos = NumberAttribute(default=0)
+    ypos = NumberAttribute(default=0)
+    robot = UnicodeAttribute(default='')
+    fromVal = UnicodeAttribute(default='')
+    type = UnicodeAttribute(default='')
 
 
 class Building(Model):
     class Meta:
         table_name = 'Building'
     id = UnicodeAttribute(hash_key=True)
-    status = UnicodeAttribute()
+    status = UnicodeAttribute(default='')
 
 
 class Robot(Model):
     class Meta:
         table_name = 'Robot'
     id = UnicodeAttribute(hash_key=True)
-    buildingID = UnicodeAttribute()
-    sensorID = UnicodeSetAttribute()
-    capabilities = UnicodeSetAttribute()
-    movement = UnicodeAttribute()
-    floor = NumberAttribute()
-    room = NumberAttribute()
-    xpos = NumberAttribute()
-    ypos = NumberAttribute()
-    fromVal = UnicodeAttribute()
+    buildingID = UnicodeAttribute(default='')
+    sensorID = UnicodeSetAttribute(default='')
+    capabilities = UnicodeSetAttribute(default='')
+    movement = UnicodeAttribute(default='')
+    floor = NumberAttribute(default=0)
+    room = NumberAttribute(default=0)
+    xpos = NumberAttribute(default=0)
+    ypos = NumberAttribute(default=0)
+    fromVal = UnicodeAttribute(default='')
 
 
 class User(Model):
     class Meta:
         table_name = 'User'
     id = UnicodeAttribute(hash_key=True)
-    buildingID = UnicodeAttribute()
-    movement = UnicodeAttribute()
-    floor = NumberAttribute()
-    room = NumberAttribute()
-    xpos = NumberAttribute()
-    ypos = NumberAttribute()
-    message = UnicodeAttribute()
-    owner = BooleanAttribute()
+    buildingID = UnicodeAttribute(default='')
+    floor = NumberAttribute(default=0)
+    room = NumberAttribute(default=0)
+    xpos = NumberAttribute(default=0)
+    ypos = NumberAttribute(default=0)
+    message = UnicodeAttribute(default='')
+    owner = BooleanAttribute(default=False)
 

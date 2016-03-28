@@ -103,17 +103,9 @@ def sensors_get() -> str:
 
 def sensors_post() -> str:
     newID = str(uuid.uuid4())
-    sensorObj = Sensor(id=newID,
-                       buildingID='default',
-                       floor=0,
-                       room=0,
-                       xpos=0,
-                       ypos=0,
-                       robot='default',
-                       fromVal='default',
-                       type='default')
+    sensorObj = Sensor(id=newID)
     sensorObj.save()
-    return newID
+    return sensorObj.attribute_values
 
 def users_delete() -> str:
     return 'do some magic!'
