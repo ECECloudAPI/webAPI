@@ -23,16 +23,16 @@ def buidlings_building_id_sensors_post(buildingID) -> str:
     return 'do some magic!'
 
 def buildings_building_id_delete(buildingID) -> str:
-	try:
-		Building = Building.get(buildingID)
-		Building.delete()
-	except Exception as e:		
-		return 'Building with buildingID=%s does not exist.' % (buildingID)
-	return 'Successfully deleted buildingID=%s.' % (buildingID)
+    try:
+        building = Building.get(buildingID)
+        building.delete()
+    except Exception as e:
+        return 'Building with buildingID=%s does not exist.' % (buildingID)
+    return 'Successfully deleted buildingID=%s.' % (buildingID)
 
 def buildings_building_id_get(buildingID) -> str:
     try:
-        building = Buidling.get(buildingID)
+        building = Building.get(buildingID)
     except Exception as e:
         print(e)
         return 'Building with id %s does not exist.' % (buildingID)
@@ -49,13 +49,10 @@ def robots_robot_id_delete(robotID) -> str:
         return 'Robot with id=%s does not exist.' % (robotID)
     return 'Successfully deleted id=%s.' % (robotID)
 
-
-
 def robots_robot_id_get(robotID) -> str:
     try:
         robot = Robot.get(robotID)
     except Exception as e:
-        print(e)
         return 'Robot with id %s does not exist.' % (robotID)
     return robot.attribute_values
 
@@ -63,18 +60,17 @@ def robots_robot_id_put(robotID, newRobot) -> str:
     return 'do some magic!'
 
 def sensors_sensor_id_delete(sensorID) -> str:
-	try:
-		sensor = Sensor.get(sensorID)
-		sensor.delete()
-	except Exception as e:		
-		return 'Sensor with id=%s does not exist.' % (sensorID)
-	return 'Successfully deleted id=%s.' % (sensorID)
+    try:
+        sensor = Sensor.get(sensorID)
+        sensor.delete()
+    except Exception as e:
+        return 'Sensor with id=%s does not exist.' % (sensorID)
+    return 'Successfully deleted id=%s.' % (sensorID)
 
 def sensors_sensor_id_get(sensorID) -> str:
     try:
         sensor = Sensor.get(sensorID)
     except Exception as e:
-        print(e)
         return 'Sensor with id %s does not exist.' % (sensorID)
     return sensor.attribute_values
 
@@ -101,7 +97,6 @@ def users_user_id_get(userID) -> str:
     try:
         user = User.get(userID)
     except Exception as e:
-        print(e)
         return 'User with id %s does not exist.' % (userID)
     return user.attribute_values
 
