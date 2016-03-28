@@ -26,7 +26,12 @@ def buildings_building_id_delete(buildingID) -> str:
     return 'do some magic!'
 
 def buildings_building_id_get(buildingID) -> str:
-    return 'do some magic!'
+    try:
+        building = Buidling.get(buildingID)
+    except Exception as e:
+        print(e)
+        return 'Building with id %s does not exist.' % (buildingID)
+    return building.attribute_values
 
 def buildings_building_id_put(buildingID, newBuilding) -> str:
     return 'do some magic!'
@@ -35,7 +40,12 @@ def robots_robot_id_delete(robotID) -> str:
     return 'do some magic!'
 
 def robots_robot_id_get(robotID) -> str:
-    return 'do some magic!'
+    try:
+        robot = Robot.get(robotID)
+    except Exception as e:
+        print(e)
+        return 'Robot with id %s does not exist.' % (robotID)
+    return robot.attribute_values
 
 def robots_robot_id_put(robotID, newRobot) -> str:
     return 'do some magic!'
@@ -44,14 +54,11 @@ def sensors_sensor_id_delete(sensorID) -> str:
     return 'do some magic!'
 
 def sensors_sensor_id_get(sensorID) -> str:
-    #return 'do some magic!'
-    print(sensorID)
     try:
         sensor = Sensor.get(sensorID)
-        print(sensor.attribute_values)
     except Exception as e:
         print(e)
-        return 'Sensor with sensorId=%s does not exist.' % (sensorID)
+        return 'Sensor with id %s does not exist.' % (sensorID)
     return sensor.attribute_values
 
 def sensors_sensor_id_put(sensorID, newSensor) -> str:
@@ -75,7 +82,12 @@ def users_user_id_delete(userID) -> str:
     return 'do some magic!'
 
 def users_user_id_get(userID) -> str:
-    return 'do some magic!'
+    try:
+        user = User.get(userID)
+    except Exception as e:
+        print(e)
+        return 'User with id %s does not exist.' % (userID)
+    return user.attribute_values
 
 def users_user_id_put(userID, newUser) -> str:
     return 'do some magic!'
