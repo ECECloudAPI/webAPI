@@ -42,7 +42,14 @@ def buildings_building_id_put(buildingID, newBuilding) -> str:
     return 'do some magic!'
 
 def robots_robot_id_delete(robotID) -> str:
-    return 'do some magic!'
+    try:
+        robot = Robot.get(robotID)
+        robot.delete()
+    except Exception as e:      
+        return 'Robot with id=%s does not exist.' % (robotID)
+    return 'Successfully deleted id=%s.' % (robotID)
+
+
 
 def robots_robot_id_get(robotID) -> str:
     try:
@@ -60,8 +67,8 @@ def sensors_sensor_id_delete(sensorID) -> str:
 		sensor = Sensor.get(sensorID)
 		sensor.delete()
 	except Exception as e:		
-		return 'Sensor with sensorId=%s does not exist.' % (sensorID)
-	return 'Successfully deleted sensorId=%s.' % (sensorID)
+		return 'Sensor with id=%s does not exist.' % (sensorID)
+	return 'Successfully deleted id=%s.' % (sensorID)
 
 def sensors_sensor_id_get(sensorID) -> str:
     try:
@@ -89,7 +96,12 @@ def sensors_sensor_id_put(sensorID, newSensor) -> str:
     return 'New sensor id=%s updated successfully.' % (data['sensorId'])
 
 def users_user_id_delete(userID) -> str:
-    return 'do some magic!'
+    try:
+        user = User.get(userID)
+        user.delete()
+    except Exception as e:      
+        return 'User with id=%s does not exist.' % (userID)
+    return 'Successfully deleted id=%s.' % (userID)
 
 def users_user_id_get(userID) -> str:
     try:
