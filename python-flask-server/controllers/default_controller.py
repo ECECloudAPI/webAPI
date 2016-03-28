@@ -57,19 +57,13 @@ def sensors_sensor_id_get(sensorID) -> str:
 def sensors_sensor_id_put(sensorID, newSensor) -> str:
     try:
         sensor = Sensor.get(sensorID)
-        print(sensor.attribute_values)
     except Exception as e:
-        #print(e)
         return 'Sensor with sensorId=%s does not exist.' % (sensorID)
-    print(newSensor)
-    data = json.loads(newSensor)
-    sensorObj = Sensor(sensorId=sensorID,
-                       sensorType=data['sensorType'],
-                       buildingId=data['buildingId'],
-                       roomId=data['roomId'],
-                       data=data['data'])
-    sensorObj.save()
-    return 'New sensor id=%s updated successfully.' % (data['sensorId'])
+    attributes = sensor.attribute_values.keys()
+    for key in newSensor.keys():
+        if key in attributes:
+            sensor.update_item(key, value=newSensor[key], action='PUT')
+    return 'New sensor id=%s updated successfully.' % (sensorID)
 
 def users_user_id_delete(userID) -> str:
     return 'do some magic!'
