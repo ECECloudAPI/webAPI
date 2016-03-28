@@ -104,7 +104,7 @@ def sensors_get() -> str:
 def sensors_post() -> str:
     newID = str(uuid.uuid4())
     sensorObj = Sensor(id=newID,
-                       buildingId='default',
+                       buildingID='default',
                        floor=0,
                        room=0,
                        xpos=0,
