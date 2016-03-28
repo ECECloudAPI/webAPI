@@ -81,7 +81,7 @@ def sensors_sensor_id_put(sensorID, newSensor) -> str:
         return 'Sensor with sensorId=%s does not exist.' % (sensorID)
     attributes = sensor.attribute_values.keys()
     for key in newSensor.keys():
-        if key in attributes:
+        if key in attributes and key is not 'id':
             sensor.update_item(key, value=newSensor[key], action='PUT')
     return 'New sensor id=%s updated successfully.' % (sensorID)
 
