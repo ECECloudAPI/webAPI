@@ -4,19 +4,19 @@ import uuid
 from flask import request, jsonify
 from storageModels import Building, Sensor, User, Robot
 
-def buildings_building_id_robots_delete(buildingID) -> str:
+def buidlings_building_id_robots_delete(buildingID) -> str:
     resultList = []
     for item in Robot.scan(buildingID__eq=buildingID):
         resultList.append(item.delete())
     return "%s items deleted" % len(resultList)
 
-def buildings_building_id_robots_get(buildingID) -> str:
+def buidlings_building_id_robots_get(buildingID) -> str:
     resultList = []
     for item in Robot.scan(buildingID__eq=buildingID):
         resultList.append(item.attribute_values)
     return ( resultList )
 
-def buildings_building_id_robots_post(buildingID) -> str:
+def buidlings_building_id_robots_post(buildingID) -> str:
     try:
         building = Building.get(buildingID)
     except Exception as e:
@@ -27,19 +27,19 @@ def buildings_building_id_robots_post(buildingID) -> str:
     newObj.save()
     return newObj.attribute_values
 
-def buildings_building_id_sensors_delete(buildingID) -> str:
+def buidlings_building_id_sensors_delete(buildingID) -> str:
     resultList = []
     for item in Sensor.scan(buildingID__eq=buildingID):
         resultList.append(item.delete())
     return "%s items deleted" % len(resultList)
 
-def buildings_building_id_sensors_get(buildingID) -> str:
+def buidlings_building_id_sensors_get(buildingID) -> str:
     resultList = []
     for item in Sensor.scan(buildingID__eq=buildingID):
         resultList.append(item.attribute_values)
     return ( resultList )
 
-def buildings_building_id_sensors_post(buildingID) -> str:
+def buidlings_building_id_sensors_post(buildingID) -> str:
     try:
         building = Building.get(buildingID)
     except Exception as e:

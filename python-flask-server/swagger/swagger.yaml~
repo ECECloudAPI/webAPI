@@ -12,12 +12,12 @@ consumes:
 produces:
 - "application/json"
 paths:
-  /buildings/{buildingID}/robots/:
+  /buidlings/{buildingID}/robots/:
     get:
       tags:
       - "byBuilding"
       description: "get all robots in a specified building"
-      operationId: "controllers.default_controller.buildings_building_id_robots_get"
+      operationId: "controllers.default_controller.buidlings_building_id_robots_get"
       parameters:
       - name: "buildingID"
         in: "path"
@@ -41,7 +41,7 @@ paths:
       tags:
       - "byBuilding"
       description: "add a robot to the specified building"
-      operationId: "controllers.default_controller.buildings_building_id_robots_post"
+      operationId: "controllers.default_controller.buidlings_building_id_robots_post"
       parameters:
       - name: "buildingID"
         in: "path"
@@ -63,7 +63,7 @@ paths:
       tags:
       - "byBuilding"
       description: "delete all robots from building"
-      operationId: "controllers.default_controller.buildings_building_id_robots_delete"
+      operationId: "controllers.default_controller.buidlings_building_id_robots_delete"
       parameters:
       - name: "buildingID"
         in: "path"
@@ -81,12 +81,12 @@ paths:
             $ref: "#/definitions/errorModel"
       x-tags:
       - tag: "byBuilding"
-  /buildings/{buildingID}/sensors/:
+  /buidlings/{buildingID}/sensors/:
     get:
       tags:
       - "byBuilding"
       description: "get all sensors in a specific building"
-      operationId: "controllers.default_controller.buildings_building_id_sensors_get"
+      operationId: "controllers.default_controller.buidlings_building_id_sensors_get"
       parameters:
       - name: "buildingID"
         in: "path"
@@ -110,7 +110,7 @@ paths:
       tags:
       - "byBuilding"
       description: "add a sensor to the specific building"
-      operationId: "controllers.default_controller.buildings_building_id_sensors_post"
+      operationId: "controllers.default_controller.buidlings_building_id_sensors_post"
       parameters:
       - name: "buildingID"
         in: "path"
@@ -132,7 +132,7 @@ paths:
       tags:
       - "byBuilding"
       description: "delete a specific user"
-      operationId: "controllers.default_controller.buildings_building_id_sensors_delete"
+      operationId: "controllers.default_controller.buidlings_building_id_sensors_delete"
       parameters:
       - name: "buildingID"
         in: "path"
