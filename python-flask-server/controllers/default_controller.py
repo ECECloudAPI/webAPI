@@ -8,7 +8,7 @@ def buildings_building_id_robots_delete(buildingID) -> str:
     resultList = []
     for item in Robot.scan(buildingID__eq=buildingID):
         resultList.append(item.delete())
-    return "%s items deleted" % len(resultList)
+    return "%s items deleted." % len(resultList)
 
 def buildings_building_id_robots_get(buildingID) -> str:
     resultList = []
@@ -31,7 +31,7 @@ def buildings_building_id_sensors_delete(buildingID) -> str:
     resultList = []
     for item in Sensor.scan(buildingID__eq=buildingID):
         resultList.append(item.delete())
-    return "%s items deleted" % len(resultList)
+    return "%s items deleted." % len(resultList)
 
 def buildings_building_id_sensors_get(buildingID) -> str:
     resultList = []
@@ -44,7 +44,7 @@ def buildings_building_id_sensors_post(buildingID) -> str:
         building = Building.get(buildingID)
     except Exception as e:
         print(e)
-        return 'Building with id %s does not exist.' % (buildingID)
+        return 'Building with id=%s does not exist.' % (buildingID)
     newID = str(uuid.uuid4())
     newObj = Sensor(id=newID, buildingID=buildingID)
     newObj.save()
@@ -55,7 +55,7 @@ def buildings_building_id_delete(buildingID) -> str:
         building = Building.get(buildingID)
         building.delete()
     except Exception as e:
-        return 'Building with buildingID=%s does not exist.' % (buildingID)
+        return 'Building with id=%s does not exist.' % (buildingID)
     return 'Successfully deleted buildingID=%s.' % (buildingID)
 
 def buildings_building_id_get(buildingID) -> str:
@@ -63,7 +63,7 @@ def buildings_building_id_get(buildingID) -> str:
         building = Building.get(buildingID)
     except Exception as e:
         print(e)
-        return 'Building with id %s does not exist.' % (buildingID)
+        return 'Building with id=%s does not exist.' % (buildingID)
     return building.attribute_values
 
 def buildings_building_id_put(buildingID, newBuilding) -> str:
@@ -75,7 +75,7 @@ def buildings_building_id_put(buildingID, newBuilding) -> str:
     for key in newBuilding.keys():
         if key in attributes and key is not 'id':
             building.update_item(key, value=newBuilding[key], action='PUT')
-    return 'New building id=%s updated successfully.' % (buildingID)
+    return 'Building with id=%s updated successfully.' % (buildingID)
 
 def robots_robot_id_delete(robotID) -> str:
     try:
@@ -83,13 +83,13 @@ def robots_robot_id_delete(robotID) -> str:
         robot.delete()
     except Exception as e:      
         return 'Robot with id=%s does not exist.' % (robotID)
-    return 'Successfully deleted id=%s.' % (robotID)
+    return 'Successfully deleted robot with id=%s.' % (robotID)
 
 def robots_robot_id_get(robotID) -> str:
     try:
         robot = Robot.get(robotID)
     except Exception as e:
-        return 'Robot with id %s does not exist.' % (robotID)
+        return 'Robot with id=%s does not exist.' % (robotID)
     return robot.attribute_values
 
 def robots_robot_id_put(robotID, newRobot) -> str:
@@ -101,7 +101,7 @@ def robots_robot_id_put(robotID, newRobot) -> str:
     for key in newRobot.keys():
         if key in attributes and key is not 'id':
             robot.update_item(key, value=newRobot[key], action='PUT')
-    return 'New robot id=%s updated successfully.' % (robotID)
+    return 'Robot with id=%s updated successfully.' % (robotID)
 
 def sensors_sensor_id_delete(sensorID) -> str:
     try:
@@ -109,25 +109,25 @@ def sensors_sensor_id_delete(sensorID) -> str:
         sensor.delete()
     except Exception as e:
         return 'Sensor with id=%s does not exist.' % (sensorID)
-    return 'Successfully deleted id=%s.' % (sensorID)
+    return 'Successfully deleted sensor with id=%s.' % (sensorID)
 
 def sensors_sensor_id_get(sensorID) -> str:
     try:
         sensor = Sensor.get(sensorID)
     except Exception as e:
-        return 'Sensor with id %s does not exist.' % (sensorID)
+        return 'Sensor with id=%s does not exist.' % (sensorID)
     return sensor.attribute_values
 
 def sensors_sensor_id_put(sensorID, newSensor) -> str:
     try:
         sensor = Sensor.get(sensorID)
     except Exception as e:
-        return 'Sensor with sensorId=%s does not exist.' % (sensorID)
+        return 'Sensor with id=%s does not exist.' % (sensorID)
     attributes = sensor.attribute_values.keys()
     for key in newSensor.keys():
         if key in attributes and key is not 'id':
             sensor.update_item(key, value=newSensor[key], action='PUT')
-    return 'New sensor id=%s updated successfully.' % (sensorID)
+    return 'Sensor with id=%s updated successfully.' % (sensorID)
 
 def users_user_id_delete(userID) -> str:
     try:
@@ -135,13 +135,13 @@ def users_user_id_delete(userID) -> str:
         user.delete()
     except Exception as e:      
         return 'User with id=%s does not exist.' % (userID)
-    return 'Successfully deleted id=%s.' % (userID)
+    return 'Successfully deleted user with id=%s.' % (userID)
 
 def users_user_id_get(userID) -> str:
     try:
         user = User.get(userID)
     except Exception as e:
-        return 'User with id %s does not exist.' % (userID)
+        return 'User with id=%s does not exist.' % (userID)
     return user.attribute_values
 
 def users_user_id_put(userID, newUser) -> str:
@@ -153,13 +153,13 @@ def users_user_id_put(userID, newUser) -> str:
     for key in newUser.keys():
         if key in attributes and key is not 'id':
             user.update_item(key, value=newUser[key], action='PUT')
-    return 'New user id=%s updated successfully.' % (userID)
+    return 'User with id=%s updated successfully.' % (userID)
 
 def buildings_delete() -> str:
     temp = []
     for item in Building.scan():
         temp.append(item.delete())
-    return "%s items deleted" % len(temp)
+    return "%s items deleted." % len(temp)
 
 def buildings_get() -> str:
     resultList = []
@@ -177,7 +177,7 @@ def robots_delete() -> str:
     temp = []
     for item in Robot.scan():
         temp.append(item.delete())
-    return "%s items deleted" % len(temp)
+    return "%s items deleted." % len(temp)
 
 def robots_get() -> str:
     resultList = []
@@ -189,7 +189,7 @@ def sensors_delete() -> str:
     temp = []
     for item in Sensor.scan():
         temp.append(item.delete())
-    return "%s items deleted" % len(temp)
+    return "%s items deleted." % len(temp)
 
 def sensors_get() -> str:
     resultList = []
@@ -207,7 +207,7 @@ def users_delete() -> str:
     temp = []
     for item in User.scan():
         temp.append(item.delete())
-    return "%s items deleted" % len(temp)
+    return "%s items deleted." % len(temp)
 
 def users_get() -> str:
     resultList = []
