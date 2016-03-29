@@ -22,6 +22,7 @@ class Sensor(Model):
     robot = UnicodeAttribute(default='')
     fromVal = UnicodeAttribute(default='')
     type = UnicodeAttribute(default='')
+    message = UnicodeAttribute(default='')
 
 
 class Building(Model):

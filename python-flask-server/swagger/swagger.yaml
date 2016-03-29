@@ -675,6 +675,8 @@ definitions:
         type: "string"
       type:
         type: "string"
+      message:
+        type: "string"
   user:
     type: "object"
     properties:
