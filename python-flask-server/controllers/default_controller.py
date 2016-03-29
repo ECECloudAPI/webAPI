@@ -139,7 +139,15 @@ def users_user_id_get(userID) -> str:
     return user.attribute_values
 
 def users_user_id_put(userID, newUser) -> str:
-    return 'do some magic!'
+    try:
+        user = User.get(userID)
+    except Exception as e:
+        return 'User with id=%s does not exist.' % (userID)
+    attributes = user.attribute_values.keys()
+    for key in newUser.keys():
+        if key in attributes and key is not 'id':
+            user.update_item(key, value=newUser[key], action='PUT')
+    return 'New user id=%s updated successfully.' % (userID)
 
 def buildings_delete() -> str:
     return 'do some magic!'
