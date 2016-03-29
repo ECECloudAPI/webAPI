@@ -20,7 +20,7 @@ sudo pip3 install -U connexion # install Connexion from PyPI
 ```
 To install awscli run
 ```
-pip install awscli
+sudo pip install awscli
 ```
 To configure awscli run and enter in your access key id and secret access key
 ```
