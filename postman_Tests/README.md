@@ -11,7 +11,7 @@ After the environment and test collections are imported you will need to set pos
 clicking on the manage environment dropdown in the top right of the window and selecting API_test. 
  
 The test are then run by opening up the collections panel, selecting the test you want to run and clicking run. 
-This will open a new window.  If the tests fail, something is wrong with how your server is set up.
+This will open a new window. 
 
 
 [1]: https://www.getpostman.com/
