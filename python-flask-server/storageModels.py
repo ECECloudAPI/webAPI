@@ -57,3 +57,6 @@ class User(Model):
     ypos = NumberAttribute(default=0)
     message = UnicodeAttribute(default='')
     owner = BooleanAttribute(default=False)
+
+#for item in Sensor.scan():
+#    item.delete()

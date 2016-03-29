@@ -156,7 +156,10 @@ def users_user_id_put(userID, newUser) -> str:
     return 'New user id=%s updated successfully.' % (userID)
 
 def buildings_delete() -> str:
-    return 'do some magic!'
+    temp = []
+    for item in Building.scan():
+        temp.append(item.delete())
+    return "%s items deleted" % len(temp)
 
 def buildings_get() -> str:
     resultList = []
@@ -171,7 +174,10 @@ def buildings_post() -> str:
     return newObj.attribute_values
 
 def robots_delete() -> str:
-    return 'do some magic!'
+    temp = []
+    for item in Robot.scan():
+        temp.append(item.delete())
+    return "%s items deleted" % len(temp)
 
 def robots_get() -> str:
     resultList = []
@@ -180,7 +186,10 @@ def robots_get() -> str:
     return resultList
 
 def sensors_delete() -> str:
-    return 'do some magic!'
+    temp = []
+    for item in Sensor.scan():
+        temp.append(item.delete())
+    return "%s items deleted" % len(temp)
 
 def sensors_get() -> str:
     resultList = []
@@ -195,7 +204,10 @@ def sensors_post() -> str:
     return sensorObj.attribute_values
 
 def users_delete() -> str:
-    return 'do some magic!'
+    temp = []
+    for item in User.scan():
+        temp.append(item.delete())
+    return "%s items deleted" % len(temp)
 
 def users_get() -> str:
     resultList = []
