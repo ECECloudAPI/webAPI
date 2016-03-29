@@ -5,7 +5,10 @@ from flask import request, jsonify
 from storageModels import Building, Sensor, User, Robot
 
 def buidlings_building_id_robots_delete(buildingID) -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Robot.scan(buildingID__eq=buildingID):
+        resultList.append(item.delete())
+    return "%s items deleted" % len(resultList)
 
 def buidlings_building_id_robots_get(buildingID) -> str:
     resultList = []
@@ -25,7 +28,10 @@ def buidlings_building_id_robots_post(buildingID) -> str:
     return newObj.attribute_values
 
 def buidlings_building_id_sensors_delete(buildingID) -> str:
-    return 'do some magic!'
+    resultList = []
+    for item in Sensor.scan(buildingID__eq=buildingID):
+        resultList.append(item.delete())
+    return "%s items deleted" % len(resultList)
 
 def buidlings_building_id_sensors_get(buildingID) -> str:
     resultList = []
