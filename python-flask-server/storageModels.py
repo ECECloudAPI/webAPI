@@ -12,46 +12,43 @@ from pynamodb.attributes import (
 
 class Sensor(Model):
     class Meta:
-        table_name = 'Sensor'
+        table_name = 'Sensors'
     id = UnicodeAttribute(hash_key=True)
-    buildingID = UnicodeAttribute(default='')
+    buildingId = UnicodeAttribute(default='')
     floor = NumberAttribute(default=0)
     room = NumberAttribute(default=0)
     xpos = NumberAttribute(default=0)
     ypos = NumberAttribute(default=0)
-    robot = UnicodeAttribute(default='')
-    fromVal = UnicodeAttribute(default='')
     type = UnicodeAttribute(default='')
-    message = UnicodeAttribute(default='')
+    model = UnicodeAttribute(default='')
+    data = UnicodeAttribute(default='')
 
 
 class Building(Model):
     class Meta:
-        table_name = 'Building'
+        table_name = 'Buildings'
     id = UnicodeAttribute(hash_key=True)
     status = UnicodeAttribute(default='')
 
 
 class Robot(Model):
     class Meta:
-        table_name = 'Robot'
+        table_name = 'Robots'
     id = UnicodeAttribute(hash_key=True)
-    buildingID = UnicodeAttribute(default='')
-    sensorID = UnicodeSetAttribute(default=[])
+    buildingId = UnicodeAttribute(default='')
+    sensorId = UnicodeSetAttribute(default=[])
     capabilities = UnicodeSetAttribute(default=[])
     movement = UnicodeAttribute(default='')
     floor = NumberAttribute(default=0)
     room = NumberAttribute(default=0)
     xpos = NumberAttribute(default=0)
     ypos = NumberAttribute(default=0)
-    fromVal = UnicodeAttribute(default='')
-
 
 class User(Model):
     class Meta:
-        table_name = 'User'
+        table_name = 'Users'
     id = UnicodeAttribute(hash_key=True)
-    buildingID = UnicodeAttribute(default='')
+    buildingId = UnicodeAttribute(default='')
     floor = NumberAttribute(default=0)
     room = NumberAttribute(default=0)
     xpos = NumberAttribute(default=0)
