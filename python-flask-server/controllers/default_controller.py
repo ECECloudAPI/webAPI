@@ -1,4 +1,3 @@
-
 import json
 import uuid
 from flask import request, jsonify
@@ -14,7 +13,7 @@ def buildings_building_id_robots_get(buildingId):
     resultList = []
     for item in Robot.scan(buildingId__eq=buildingId):
         resultList.append(item.attribute_values)
-    return ( resultList )
+    return resultList
 
 def buildings_building_id_robots_post(buildingId):
     try:
@@ -37,7 +36,7 @@ def buildings_building_id_sensors_get(buildingId):
     resultList = []
     for item in Sensor.scan(buildingId__eq=buildingId):
         resultList.append(item.attribute_values)
-    return ( resultList )
+    return resultList
 
 def buildings_building_id_sensors_post(buildingId):
     try:
@@ -81,7 +80,7 @@ def robots_robot_id_delete(robotId):
     try:
         robot = Robot.get(robotId)
         robot.delete()
-    except Exception as e:      
+    except Exception as e:
         return 'Robot with id=%s does not exist.' % (robotId)
     return 'Successfully deleted robot with id=%s.' % (robotId)
 
@@ -129,94 +128,108 @@ def sensors_sensor_id_put(sensorId, newSensor):
             sensor.update_item(key, value=newSensor[key], action='PUT')
     return 'Sensor with id=%s updated successfully.' % (sensorId)
 
-def users_user_id_delete(userId):
+def users_user_id_delete(userid):
+    """ Method to delete user using user id """
     try:
-        user = User.get(userId)
+        user = User.get(userid)
         user.delete()
-    except Exception as e:      
-        return 'User with id=%s does not exist.' % (userId)
-    return 'Successfully deleted user with id=%s.' % (userId)
-
-def users_user_id_get(userId):
-    try:
-        user = User.get(userId)
     except Exception as e:
-        return 'User with id=%s does not exist.' % (userId)
+        return 'User with id=%s does not exist.' % (userid)
+    return 'Successfully deleted user with id=%s.' % (userid)
+
+def users_user_id_get(userid):
+    """ Method to get user using user id """
+    try:
+        user = User.get(userid)
+    except Exception as e:
+        return 'User with id=%s does not exist.' % (userid)
     return user.attribute_values
 
-def users_user_id_put(userId, newUser):
+def users_user_id_put(userid, newuser):
+    """ Method to update a particular user using user id """
     try:
-        user = User.get(userId)
+        user = User.get(userid)
     except Exception as e:
-        return 'User with id=%s does not exist.' % (userId)
+        return 'User with id=%s does not exist.' % (userid)
     attributes = user.attribute_values.keys()
-    for key in newUser.keys():
+    for key in newuser.keys():
         if key in attributes and key is not 'id':
-            user.update_item(key, value=newUser[key], action='PUT')
-    return 'User with id=%s updated successfully.' % (userId)
+            user.update_item(key, value=newuser[key], action='PUT')
+    return 'User with id=%s updated successfully.' % (userid)
 
 def buildings_delete():
+    """ Method to delete buildings """
     temp = []
     for item in Building.scan():
         temp.append(item.delete())
     return "%s items deleted." % len(temp)
 
 def buildings_get():
-    resultList = []
+    """ Method to get all buildings """
+    resultlist = []
     for item in Building.scan():
-        resultList.append(item.attribute_values)
-    return resultList
+        resultlist.append(item.attribute_values)
+    return resultlist
 
 def buildings_post():
-    newID = str(uuid.uuid4())
-    newObj = Building(id=newID)
-    newObj.save()
-    return newObj.attribute_values
+    """ Method to post a new building """
+    newid = str(uuid.uuid4())
+    newobj = Building(id=newid)
+    newobj.save()
+    return newobj.attribute_values
 
 def robots_delete():
+    """ Method to delete all robots """
     temp = []
     for item in Robot.scan():
         temp.append(item.delete())
     return "%s items deleted." % len(temp)
 
 def robots_get():
-    resultList = []
+    """ Method to get all robots """ 
+    resultlist = []
     for item in Robot.scan():
-        resultList.append(item.attribute_values)
-    return resultList
+        resultlist.append(item.attribute_values)
+    return resultlist
 
 def sensors_delete():
+    """ Method to delete all sensors """
     temp = []
     for item in Sensor.scan():
         temp.append(item.delete())
     return "%s items deleted." % len(temp)
 
 def sensors_get():
-    resultList = []
+    """ Method to get all sensors """
+    resultlist = []
     for item in Sensor.scan():
-        resultList.append(item.attribute_values)
-    return resultList
+        resultlist.append(item.attribute_values)
+    return resultlist
 
 def sensors_post():
-    newID = str(uuid.uuid4())
-    sensorObj = Sensor(id=newID)
-    sensorObj.save()
-    return sensorObj.attribute_values
+    """ Method to post a new sensor """
+    newid = str(uuid.uuid4())
+    sensorobj = Sensor(id=newid)
+    sensorobj.save()
+    return sensorobj.attribute_values
 
 def users_delete():
+    """ Method to delete all users """
     temp = []
     for item in User.scan():
         temp.append(item.delete())
     return "%s items deleted." % len(temp)
 
 def users_get():
-    resultList = []
+    """ Method to get all users """
+    resultlist = []
     for item in User.scan():
-        resultList.append(item.attribute_values)
-    return resultList
+        resultlist.append(item.attribute_values)
+    return resultlist
 
 def users_post():
-    newID = str(uuid.uuid4())
-    newObj = User(id=newID)
-    newObj.save()
-    return newObj.attribute_values
+    """ Method to post a new user """
+    newid = str(uuid.uuid4())
+    newobj = User(id=newid)
+    newobj.save()
+    return newobj.attribute_values
