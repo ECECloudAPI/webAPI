@@ -36,8 +36,8 @@ class Robot(Model):
         table_name = 'Robots'
     id = UnicodeAttribute(hash_key=True)
     buildingId = UnicodeAttribute(default='')
-    sensorId = UnicodeSetAttribute(default=[])
-    capabilities = UnicodeSetAttribute(default=[])
+    sensorId = JSONAttribute(default='[]')
+    capabilities = JSONAttribute(default='[]')
     movement = UnicodeAttribute(default='')
     floor = NumberAttribute(default=0)
     room = NumberAttribute(default=0)
