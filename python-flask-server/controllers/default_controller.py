@@ -242,12 +242,34 @@ def users_delete():
         temp.append(item.delete())
     return "%s items deleted." % len(temp)
 
-def users_get():
+def users_get(owner=[], buildingId=[], room=[]):
     """ method to get all users """
     resultlist = []
-    for item in User.scan():
+    items = []
+    if (owner != [] and buildingId != [] and room != []):
+       items = User.scan(owner__eq=owner, buildingId__eq=buildingId, room__eq=room);
+    elif (buildingId != [] and room != []):
+       items = User.scan(buildingId__eq=buildingId, room__eq=room);
+    elif (owner != [] and buildingId != []):
+       items = User.scan(owner__eq=owner, buildingId__eq=buildingId);
+    elif (owner != [] and room != []):
+       items = User.scan(owner__eq=owner, room__eq=room);
+    elif (owner != []):
+       items = User.scan(owner__eq=owner);
+    elif (buildingId != []):
+       items = User.scan(buildingId__eq=buildingId);
+    elif (room != []):
+       items = User.scan(room__eq=room);
+    else:
+       items = User.scan();
+    for item in items:
         resultlist.append(item.attribute_values)
-    return resultlist
+    return resultlist;
+
+    #resultlist = []
+    #for item in User.scan():
+    #    resultlist.append(item.attribute_values)
+    #return resultlist
 
 def users_post():
     """ method to post a new user """

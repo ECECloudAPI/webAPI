@@ -530,7 +530,22 @@ paths:
       - "byType"
       description: "get a list of users"
       operationId: "controllers.default_controller.users_get"
-      parameters: []
+      parameters: 
+        - name: owner
+          description: "owner filter for users"
+          in: query
+          required: false
+          type: boolean
+        - name: buildingId
+          description: "building filter for users"
+          in: query
+          required: false
+          type: string
+        - name: room
+          description: "room filter for users"
+          in: query
+          required: false
+          type: integer
       responses:
         200:
           description: "array of users in the database"
