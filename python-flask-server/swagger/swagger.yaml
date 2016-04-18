@@ -669,12 +669,15 @@ paths:
       - tag: "byID"
 definitions:
   building:
-    type: "object"
+    type: object
     properties:
       id:
-        type: "string"
+        type: string
+      ownerId:
+        type: string
+        description: The user that owns the building
       status:
-        type: "string"
+        type: string
   sensor:
     type: "object"
     properties:
@@ -707,6 +710,11 @@ definitions:
         type: "string"
       buildingId:
         type: "string"
+      ownedBuildings:
+        type: array
+        description: A list of buildings that the user owns
+        items:
+          type: string
       floor:
         type: "number"
         format: "int"
@@ -737,6 +745,11 @@ definitions:
         type: "string"
       buildingId:
         type: "string"
+      ownedBuildings:
+        type: array
+        description: A list of buildings that the user owns
+        items:
+          type: string
       sensorId:
         type: "array"
         items:

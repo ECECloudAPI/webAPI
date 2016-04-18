@@ -28,6 +28,7 @@ class Building(Model):
     class Meta:
         table_name = 'Buildings'
     id = UnicodeAttribute(hash_key=True)
+    ownerId = UnicodeAttribute(default='') 
     status = UnicodeAttribute(default='')
 
 

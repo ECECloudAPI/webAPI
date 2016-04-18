@@ -163,7 +163,15 @@ def users_user_id_get(userId):
     """ method to retrieve user using user id """
     try:
         user = User.get(userId)
-    except Exception:
+        buildings = Building.scan(ownerId__eq=userId)
+        #add ownedBuildings to the user object without having it reflect in the model
+        user.__dict__["attribute_values"].update({"ownedBuildings": []}) 
+        #look at all the builings the user owns
+        for building in buildings:
+            #add the builings to the ownedBuildings list
+            user.__dict__["attribute_values"]["ownedBuildings"].append(building.attribute_values["id"])
+    except Exception as inst:
+        print(inst.args)
         return 'User with id=%s does not exist.' % (userId)
     return user.attribute_values
 
@@ -188,15 +196,18 @@ def buildings_delete():
 
 def buildings_get():
     """ method to get all buildings """
-    resultlist = []
+    resultlist = []	
     for item in Building.scan():
         resultlist.append(item.attribute_values)
     return resultlist
 
 def buildings_post():
     """ method to post a new building """
+    body = request.get_data()
+    body = json.loads(body.decode("utf-8"))
     newid = str(uuid.uuid4())
     newobj = Building(id=newid)
+    newobj.ownerId = body["ownerId"]
     newobj.save()
     return newobj.attribute_values
 
