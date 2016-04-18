@@ -36,10 +36,19 @@ def buildings_building_id_sensors_delete(buildingId):
         resultlist.append(item.delete())
     return "%s items deleted." % len(resultlist)
 
-def buildings_building_id_sensors_get(buildingId):
+def buildings_building_id_sensors_get(buildingId, room=[], type=[]):
     """ method to get sensors using building id """
     resultlist = []
-    for item in Sensor.scan(buildingId__eq=buildingId):
+    items = []
+    if room and type:
+       items = Sensor.scan(buildingId__eq=buildingId,room__eq=room,type__eq=type)
+    elif room:
+       items = Sensor.scan(buildingId__eq=buildingId,room__eq=room)
+    elif type:
+       items = Sensor.scan(buildingId__eq=buildingId,type__eq=type)
+    else:
+       items = Sensor.scan(buildingId__eq=buildingId)
+    for item in items:
         resultlist.append(item.attribute_values)
     return resultlist
 

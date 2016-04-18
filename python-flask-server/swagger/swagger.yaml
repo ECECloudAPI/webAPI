@@ -220,6 +220,16 @@ paths:
         description: "id for specific building"
         required: true
         type: "string"
+      - name: "room"
+        in: "query"
+        description: "specific room number"
+        required: false
+        type: "integer"  
+      - name: "type"
+        in: "query"
+        description: "type of sensor"
+        required: false
+        type: "string"  
       responses:
         200:
           description: "sensors in the building"
