@@ -288,3 +288,33 @@ def users_post():
     newobj = User(id=newid)
     newobj.save()
     return newobj.attribute_values
+
+	def login_get(email,password):
+	try:
+		userid = Login.get(email)
+	except Exception:
+		return 'User with email=%s does not exist.' % (email)
+	if(userid.attribute_values['password']!=password): return 'Incorrect Password'
+	return userid.attribute_values['userid']
+def login_post(email, password):
+	try:
+		user = Login.get(email)
+	except Exception:		
+		newid = str(uuid.uuid4())
+		newuser = Login(email=email,password=password,userid=newid)
+		newuser.save()
+		newobj = User(id=newid)
+		newobj.save()
+		return newuser.attribute_values['userid']
+	return 'User with Email %s already exists.' % (email)
+def login_delete(email,password):
+	try:
+		user = Login.get(email)
+		if(user.attribute_values['password']==password):
+			usaa = User.get(user.attribute_values['userid'])
+			usaa.delete()
+			user.delete()
+		else: return "Password Incorrect"
+	except Exception:      
+		return 'User with email=%s does not exist.' % (email)
+	return 'Successfully deleted user with email=%s.' % (email)   
