@@ -56,6 +56,12 @@ class User(Model):
     ypos = NumberAttribute(default=0)
     message = UnicodeAttribute(default='')
     owner = BooleanAttribute(default=False)
+class Login(Model):
+	class Meta:
+		table_name = 'Login'
+	email = UnicodeAttribute(hash_key=True)
+	password = UnicodeAttribute(default='')
+	userid = UnicodeAttribute(default='')
 
 #for item in Sensor.scan():
 #    item.delete()
