@@ -1,7 +1,7 @@
 import json
 import uuid
 from flask import request, jsonify
-from storageModels import Building, Sensor, User, Robot
+from storageModels import Building, Sensor, User, Robot, Login
 
 ######################## /buildings/{buildingId}/robots ############################
 
