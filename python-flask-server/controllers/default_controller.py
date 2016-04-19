@@ -207,7 +207,8 @@ def buildings_post():
     body = json.loads(body.decode("utf-8"))
     newid = str(uuid.uuid4())
     newobj = Building(id=newid)
-    newobj.ownerId = body["ownerId"]
+    if "ownerId" in body:
+        newobj.ownerId = body["ownerId"]
     newobj.save()
     return newobj.attribute_values
 
