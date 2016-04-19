@@ -2,7 +2,7 @@
 import json
 import uuid
 from flask import request, jsonify
-from storageModels import Building, Sensor, User, Robot
+from storageModels import Building, Sensor, User, Robot, Login
 
 def buildings_building_id_robots_delete(buildingId):
     """ method to delete all robots inside a building """
