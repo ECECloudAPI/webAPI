@@ -1,8 +1,9 @@
-
 import json
 import uuid
 from flask import request, jsonify
-from storageModels import Building, Sensor, User, Robot, Login
+from storageModels import Building, Sensor, User, Robot
+
+######################## /buildings/{buildingId}/robots ############################
 
 def buildings_building_id_robots_delete(buildingId):
     """ method to delete all robots inside a building """
@@ -11,12 +12,20 @@ def buildings_building_id_robots_delete(buildingId):
         resultlist.append(item.delete())
     return "%s items deleted." % len(resultlist)
 
-def buildings_building_id_robots_get(buildingId):
-    """ method to get all robots inside a building """
-    resultlist = []
-    for item in Robot.scan(buildingId__eq=buildingId):
-        resultlist.append(item.attribute_values)
-    return resultlist
+def buildings_building_id_robots_get(buildingId, capability = None):
+	resultList = []
+	try:
+		building = Building.get(buildingId)
+	except Exception as e:
+		return 'Building with id=%s does not exist.' % (buildingId)
+    
+	if capability is not None and capability != '':
+		for item in Robot.scan(buildingId__eq=buildingId, capabilities__contains=capability, conditional_operator='AND'):
+			resultList.append(item.attribute_values)
+	else:
+		for item in Robot.scan(buildingId__eq=buildingId):
+			resultList.append(item.attribute_values)
+	return resultList
 
 def buildings_building_id_robots_post(buildingId):
     """ method to post robot under a  building """
@@ -28,6 +37,8 @@ def buildings_building_id_robots_post(buildingId):
     newobj = Robot(id=newid, buildingId=buildingId)
     newobj.save()
     return newobj.attribute_values
+
+######################## /buildings/{buildingId}/sensors ###########################
 
 def buildings_building_id_sensors_delete(buildingId):
     """ method to delete sensor using building id """
@@ -63,6 +74,8 @@ def buildings_building_id_sensors_post(buildingId):
     newobj.save()
     return newobj.attribute_values
 
+######################## /buildings/{buildingId} ############################
+
 def buildings_building_id_delete(buildingId):
     """ method to delete building using building id """
     try:
@@ -92,6 +105,8 @@ def buildings_building_id_put(buildingId, newBuilding):
             building.update_item(key, value=newBuilding[key], action='PUT')
     return 'Building with id=%s updated successfully.' % (buildingId)
 
+######################## /robots/{robotId} ############################
+
 def robots_robot_id_delete(robotId):
     """ method to delete a robot using robot id """
     try:
@@ -115,11 +130,28 @@ def robots_robot_id_put(robotId, newRobot):
         robot = Robot.get(robotId)
     except Exception:
         return 'Robot with id=%s does not exist.' % (robotId)
+	
+	# Need to check that if building ID is changed, the new Building exists
+    if 'buildingId' in newRobot:
+    	try:
+    		building = Building.get(newRobot['buildingId'])
+    	except Exception as e:
+    		return 'Building with specified ID does not exist'
+    
+    # Do the same for sensor ID
+    if 'sensorId' in newRobot:
+    	try:
+    		sensor = Sensor.get(newRobot['sensorId'])
+    	except Exception as e:
+    		return 'Sensor with specified ID does not exist'
+    
     attributes = robot.attribute_values.keys()
     for key in newRobot.keys():
         if key in attributes and key is not 'id':
             robot.update_item(key, value=newRobot[key], action='PUT')
     return 'Robot with id=%s updated successfully.' % (robotId)
+
+######################## /sensors/{sensorId} ############################
 
 def sensors_sensor_id_delete(sensorId):
     """ method to delete a sensor using sensor id """
@@ -144,11 +176,21 @@ def sensors_sensor_id_put(sensorId, newSensor):
         sensor = Sensor.get(sensorId)
     except Exception:
         return 'Sensor with id=%s does not exist.' % (sensorId)
+    
+    # Need to check that if building ID is changed, the new Building exists
+    if 'buildingId' in newSensor:
+    	try:
+    		building = Building.get(newSensor['buildingId'])
+    	except Exception as e:
+    		return 'Building with specified ID does not exist'
+    
     attributes = sensor.attribute_values.keys()
     for key in newSensor.keys():
         if key in attributes and key is not 'id':
             sensor.update_item(key, value=newSensor[key], action='PUT')
     return 'Sensor with id=%s updated successfully.' % (sensorId)
+
+######################## /users/{userId} ############################
 
 def users_user_id_delete(userId):
     """ method to delete user using user id """
@@ -181,11 +223,21 @@ def users_user_id_put(userId, newUser):
         user = User.get(userId)
     except Exception:
         return 'User with id=%s does not exist.' % (userId)
+    
+    # Need to check that if building ID is changed, the new Building exists
+    if 'buildingId' in newuser:
+    	try:
+    		building = Building.get(newuser['buildingId'])
+    	except Exception as e:
+    		return 'Building with specified ID does not exist'
+    
     attributes = user.attribute_values.keys()
     for key in newUser.keys():
         if key in attributes and key is not 'id':
             user.update_item(key, value=newUser[key], action='PUT')
     return 'User with id=%s updated successfully.' % (userId)
+
+########################### /buildings/ ###############################
 
 def buildings_delete():
     """ method to delete all buildings """
@@ -205,11 +257,20 @@ def buildings_post():
     """ method to post a new building """
     body = request.get_data()
     body = json.loads(body.decode("utf-8"))
+    
+    # Check that the owner exists
+#    try:
+#    	owner = User.get(body["ownerId"])
+#    except Excpetion as e:
+#    	return 'The owner specified does not exist'
+    
     newid = str(uuid.uuid4())
     newobj = Building(id=newid)
     newobj.ownerId = body["ownerId"]
     newobj.save()
     return newobj.attribute_values
+
+########################### /robots/ ###############################
 
 def robots_delete():
     """ method to delete all robots """
@@ -224,6 +285,8 @@ def robots_get():
     for item in Robot.scan():
         resultlist.append(item.attribute_values)
     return resultlist
+
+########################### /sensors/ ###############################
 
 def sensors_delete():
     """ method to delete sensor """
@@ -245,6 +308,8 @@ def sensors_post():
     sensorobj = Sensor(id=newid)
     sensorobj.save()
     return sensorobj.attribute_values
+
+########################### /users/ ###############################
 
 def users_delete():
     """ method to delete all users """
@@ -289,6 +354,8 @@ def users_post():
     newobj.save()
     return newobj.attribute_values
 
+######################## /login/{email}/{password} ###########################
+
 def login_get(email,password):
 	try:
 		userid = Login.get(email)
@@ -296,6 +363,7 @@ def login_get(email,password):
 		return 'User with email=%s does not exist.' % (email)
 	if(userid.attribute_values['password']!=password): return 'Incorrect Password'
 	return userid.attribute_values['userid']
+
 def login_post(email, password):
 	try:
 		user = Login.get(email)
@@ -307,6 +375,7 @@ def login_post(email, password):
 		newobj.save()
 		return newuser.attribute_values['userid']
 	return 'User with Email %s already exists.' % (email)
+
 def login_delete(email,password):
 	try:
 		user = Login.get(email)
@@ -317,4 +386,4 @@ def login_delete(email,password):
 		else: return "Password Incorrect"
 	except Exception:      
 		return 'User with email=%s does not exist.' % (email)
-	return 'Successfully deleted user with email=%s.' % (email)   
+	return 'Successfully deleted user with email=%s.' % (email) 
